@@ -1,0 +1,179 @@
+package com.supplyco.jsonqr.einvoice;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.supplyco.jsonqr.model.BchDtls;
+import com.supplyco.jsonqr.model.BuyerDtls;
+import com.supplyco.jsonqr.model.DispDtls;
+import com.supplyco.jsonqr.model.DocDtls;
+import com.supplyco.jsonqr.model.EwbDtls;
+import com.supplyco.jsonqr.model.ItemList;
+import com.supplyco.jsonqr.model.MasterEinvoice;
+import com.supplyco.jsonqr.model.SellerDtls;
+import com.supplyco.jsonqr.model.TranDtls;
+import com.supplyco.jsonqr.model.ValDtls;
+
+public class JsonInit {
+	
+	private static String isuno;
+	private static String olcode;
+	private static String jsonpath;
+	
+	public JsonInit(){
+		
+		System.out.println("Building JSON file..");
+	}
+	
+public boolean createjson(String isuno,String olcode,String jsonpath) {
+		
+		//final String path ="D://temp//"+isuno+"inv"+olcode;
+		try {
+			
+			ObjectMapper mapper = new ObjectMapper();
+	        MasterEinvoice master = newjson(isuno,olcode);
+	        
+	            mapper.writeValue(new File(jsonpath+".json"), master);
+	            String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(master);
+	            System.out.println(jsonString);
+	            return true;
+	      
+			
+		} catch (Exception e) {
+			System.out.println("Create JSON Exception "+e.getMessage());
+			return false;
+		}
+
+
+	}
+private static MasterEinvoice newjson(String isuno , String olcode) {
+	
+	
+	
+	MasterEinvoice master = new MasterEinvoice();
+	
+	
+	TranDtls tranDtls = new TranDtls();
+	tranDtls.setTaxSch("GST");
+	tranDtls.setSupTyp("B2B");
+	tranDtls.setIgstOnIntra("N");
+	tranDtls.setEcmGstin(null);
+	
+	DocDtls docDtls = new DocDtls();
+	
+	docDtls.setTyp("INV");
+	docDtls.setNo("2010245");
+	docDtls.setDt("12/10/2020");
+	
+	
+	SellerDtls sellerDtls = new SellerDtls();
+	sellerDtls.setGstin("32AAACK6767FHZ5");
+	sellerDtls.setLglNm("KERALA STATE CIVIL SUPPLIES CORPORATION LTD");
+	sellerDtls.setTrdNm("KERALA STATE CIVIL SUPPLIES CORPORATION LTD");
+	sellerDtls.setAddr1("ADDONE1");
+	sellerDtls.setAddr2("ADDONE2");
+	sellerDtls.setLoc("ERNAMKULAM");
+	sellerDtls.setPin(682020);
+	sellerDtls.setStcd("32");
+	sellerDtls.setPh("9999999999");
+	sellerDtls.setEm("supplyco@gmail.com");
+
+	BuyerDtls buyerDtls = new BuyerDtls();
+	buyerDtls.setGstin("32AHHY8465855HA");
+	buyerDtls.setLglNm("SREELATHA SATHISHA");
+	buyerDtls.setTrdNm("MANASA ECO BAGS");
+	buyerDtls.setPos("32");
+	buyerDtls.setAddr1("ADDRESS 1");
+	buyerDtls.setAddr2("ADDRESS 2");
+	buyerDtls.setLoc("KASARKODE");
+	buyerDtls.setPin(658958);
+	buyerDtls.setStcd("32");
+	buyerDtls.setPh("999999999");
+	buyerDtls.setEm("abc@gmail.com");
+	
+	DispDtls dispDtls = new DispDtls();
+	dispDtls.setNm("Dispatchname");
+	dispDtls.setAddr1("ADDRESS1");
+	dispDtls.setAddr2("ADDRESS2");
+	dispDtls.setLoc("Dispatch LOCATION");
+	dispDtls.setPin(5486258);
+	dispDtls.setStcd("32");
+	
+	ValDtls valDtls = new ValDtls();
+	valDtls.setAssVal(4900);
+	valDtls.setIgstVal(0);
+	valDtls.setCgstVal(227.5);
+	valDtls.setSgstVal(227.5);
+	valDtls.setCesVal(9.8);
+	valDtls.setDiscount(369);
+	valDtls.setOthChrg(0);
+	valDtls.setRndOffAmt(0);
+	valDtls.setTotInvVal(5000.7);
+	
+	EwbDtls ewbDtls = new EwbDtls();
+	ewbDtls.setTransId("32AAACK6767FHZ5");
+	ewbDtls.setTransName("transOne");
+	ewbDtls.setTransMode("1");
+	ewbDtls.setDistance(25);
+	ewbDtls.setTransDocNo("20107");
+	ewbDtls.setTransDocDt("12/10/2020");
+	ewbDtls.setVehNo("KL 52 J 3263");
+	ewbDtls.setVehType("R");
+	
+	List<ItemList> itemlist = new ArrayList<ItemList>(); 
+	ItemList itemList = new ItemList();
+	itemList.setSlNo("1");
+	itemList.setPrdDesc("COMMODITY NAME");
+	itemList.setIsServc("N");
+	itemList.setHsnCd("11025455");
+	itemList.setBarcde(null);
+	itemList.setQty(10);
+	itemList.setFreeQty(0);
+	itemList.setUnit("BAG");
+	itemList.setUnitPrice(300); //set int to double 300.00
+	itemList.setTotAmt(3000);
+	itemList.setDiscount(0);
+	itemList.setPreTaxVal(0);
+	itemList.setAssAmt(3000);
+	itemList.setGstRt(12);
+	itemList.setIgstAmt(0);
+	itemList.setCgstAmt(180);
+	itemList.setSgstAmt(180);
+	itemList.setCesRt(0.2);
+	itemList.setCesAmt(6);
+	itemList.setCesNonAdvlAmt(0);
+	itemList.setStateCesRt(0.1);
+	itemList.setStateCesAmt(3);
+	itemList.setStateCesNonAdvlAmt(0);
+	itemList.setOthChrg(0);
+	itemList.setTotItemVal(3369);
+	
+	BchDtls bchDtls = new BchDtls();
+	bchDtls.setNm("bb22yy");
+	bchDtls.setExpDt("30/11/2026");
+	bchDtls.setWrDt("90/11/2026");
+	itemList.setBchDtls(bchDtls);
+	
+	itemlist.add(itemList);
+	
+	
+	master.setVersion("1.1");
+	master.setTranDtls(tranDtls);
+	master.setDocDtls(docDtls);
+	master.setSellerDtls(sellerDtls);
+	master.setBuyerDtls(buyerDtls);
+	master.setDispDtls(dispDtls);
+	master.setShipDtls(null);
+	master.setValDtls(valDtls);
+	master.setEwbDtls(ewbDtls);
+	master.setItemList(itemlist);
+	
+	
+	
+	return master;
+	
+}
+
+}

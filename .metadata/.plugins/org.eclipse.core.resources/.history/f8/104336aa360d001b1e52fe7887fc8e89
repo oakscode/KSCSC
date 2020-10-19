@@ -1,0 +1,113 @@
+package com.supplyco.jsonqr.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.supplyco.jsonqr.dao.MasterDAO;
+import com.supplyco.jsonqr.model.Dippo;
+
+@Controller
+public class MasterController {
+	
+	@Autowired
+	MasterDAO dao;
+	
+	@RequestMapping(value = "/issuelist",produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public String test(HttpServletResponse response) {
+
+		return "{\r\n" + 
+				"  \"data\": [\r\n" + 
+				"    [\r\n" + 
+				"      \"Airi\",\r\n" + 
+				"      \"Satou\",\r\n" + 
+				"      \"Accountant\",\r\n" + 
+				"      \"Tokyo\",\r\n" + 
+				"      \"28th Nov 08\",\r\n" + 
+				"      \"$162,700\"\r\n" + 
+				"    ],\r\n" + 
+				"    [\r\n" + 
+				"      \"Angelica\",\r\n" + 
+				"      \"Ramos\",\r\n" + 
+				"      \"Chief Executive Officer (CEO)\",\r\n" + 
+				"      \"London\",\r\n" + 
+				"      \"9th Oct 09\",\r\n" + 
+				"      \"$1,200,000\"\r\n" + 
+				"    ],\r\n" + 
+				"    [\r\n" + 
+				"      \"Ashton\",\r\n" + 
+				"      \"Cox\",\r\n" + 
+				"      \"Junior Technical Author\",\r\n" + 
+				"      \"San Francisco\",\r\n" + 
+				"      \"12th Jan 09\",\r\n" + 
+				"      \"$86,000\"\r\n" + 
+				"    ],\r\n" + 
+				"    [\r\n" + 
+				"      \"Bradley\",\r\n" + 
+				"      \"Greer\",\r\n" + 
+				"      \"Software Engineer\",\r\n" + 
+				"      \"London\",\r\n" + 
+				"      \"13th Oct 12\",\r\n" + 
+				"      \"$132,000\"\r\n" + 
+				"    ],\r\n" + 
+				"    [\r\n" + 
+				"      \"Brenden\",\r\n" + 
+				"      \"Wagner\",\r\n" + 
+				"      \"Software Engineer\",\r\n" + 
+				"      \"San Francisco\",\r\n" + 
+				"      \"7th Jun 11\",\r\n" + 
+				"      \"$206,850\"\r\n" + 
+				"    ],\r\n" + 
+				"    [\r\n" + 
+				"      \"Brielle\",\r\n" + 
+				"      \"Williamson\",\r\n" + 
+				"      \"Integration Specialist\",\r\n" + 
+				"      \"New York\",\r\n" + 
+				"      \"2nd Dec 12\",\r\n" + 
+				"      \"$372,000\"\r\n" + 
+				"    ],\r\n" + 
+				"    [\r\n" + 
+				"      \"Bruno\",\r\n" + 
+				"      \"Nash\",\r\n" + 
+				"      \"Software Engineer\",\r\n" + 
+				"      \"London\",\r\n" + 
+				"      \"3rd May 11\",\r\n" + 
+				"      \"$163,500\"\r\n" + 
+				"    ],\r\n" + 
+				"    [\r\n" + 
+				"      \"Caesar\",\r\n" + 
+				"      \"Vance\",\r\n" + 
+				"      \"Pre-Sales Support\",\r\n" + 
+				"      \"New York\",\r\n" + 
+				"      \"12th Dec 11\",\r\n" + 
+				"      \"$106,450\"\r\n" + 
+				"    ],\r\n" + 
+				"    [\r\n" + 
+				"      \"Cara\",\r\n" + 
+				"      \"Stevens\",\r\n" + 
+				"      \"Sales Assistant\",\r\n" + 
+				"      \"New York\",\r\n" + 
+				"      \"6th Dec 11\",\r\n" + 
+				"      \"$145,600\"\r\n" + 
+				"    ],\r\n" + 
+				"    [\r\n" + 
+				"      \"Cedric\",\r\n" + 
+				"      \"Kelly\",\r\n" + 
+				"      \"Senior Javascript Developer\",\r\n" + 
+				"      \"Edinburgh\",\r\n" + 
+				"      \"29th Mar 12\",\r\n" + 
+				"      \"$433,060\"\r\n" + 
+				"    ]\r\n" + 
+				"  ]\r\n" + 
+				"}";
+		
+	}
+
+}

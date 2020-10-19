@@ -1,0 +1,7 @@
+package com.supplyco.jsonqr.dao_impl;
+
+import com.supplyco.jsonqr.dao.AdminDao;
+
+public class Admin_Dao_impl implements AdminDao{
+
+}

@@ -1,0 +1,5 @@
+package com.supplyco.jsonqr.model;
+
+public class BchDtls {
+
+}

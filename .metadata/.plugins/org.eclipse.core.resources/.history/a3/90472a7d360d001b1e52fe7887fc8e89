@@ -1,0 +1,13 @@
+package com.supplyco.jsonqr.dao;
+
+import java.util.List;
+
+import com.supplyco.jsonqr.model.Dippo;
+import com.supplyco.jsonqr.model.Southead;
+
+public interface MasterDAO {
+	public List<Dippo> dippolist();
+	
+	public List<Southead> isulist();
+
+}

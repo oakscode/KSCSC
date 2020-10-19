@@ -1,0 +1,33 @@
+package com.supplyco.jsonqr.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.supplyco.jsonqr.dao.MasterDAO;
+import com.supplyco.jsonqr.model.Dippo;
+
+@Controller
+public class MasterController {
+	
+	@Autowired
+	MasterDAO dao;
+	
+	@RequestMapping(value = "/")
+	public void test(HttpServletResponse response) {
+
+
+		List<Dippo> li = dao.dippolist();
+		
+		for(Dippo d : li) {
+			
+			System.out.println("Deppo Name :"+d.getDipponame()+" code :"+d.getDippocode());
+		}
+		
+	}
+
+}

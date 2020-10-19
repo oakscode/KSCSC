@@ -1,0 +1,5 @@
+package com.supplyco.jsonqr.einvoice;
+
+public class JsonInit {
+
+}

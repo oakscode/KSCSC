@@ -1,0 +1,64 @@
+package com.supplyco.jsonqr.controller;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.supplyco.jsonqr.dao.AdminDao;
+import com.supplyco.jsonqr.dao.MasterDAO;
+import com.supplyco.jsonqr.model.Dippo;
+import com.supplyco.jsonqr.model.Login;
+
+@Controller
+public class LoginController {
+	
+	@Autowired
+	AdminDao dao;
+	
+	@Autowired
+	MasterDAO mdao;
+	
+	@RequestMapping(value = "/login")
+	public ModelAndView getlogin(HttpServletResponse response) {
+
+		return new ModelAndView("login");
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ModelAndView post(HttpServletResponse response,HttpSession session, @ModelAttribute Login login) throws IOException {
+		
+		ModelAndView mv = new ModelAndView("home") ;
+		
+		login.setDeppo("0000000");
+		
+		try {
+			Login log = dao.login(login);
+			
+			List<Dippo> dippolist = mdao.dippolist();
+			
+			mv.addObject("dippolist", dippolist); //dippo list from hodm.dippo
+
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("exceptio catch :"+e.getMessage());
+			mv = getlogin(response);
+			mv.addObject("msg", "invalied login");
+		}
+		return mv;
+		
+	}
+
+}

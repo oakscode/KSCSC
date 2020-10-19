@@ -1,0 +1,5 @@
+package com.supplyco.jsonqr.dao_impl;
+
+public class MasterDao {
+
+}

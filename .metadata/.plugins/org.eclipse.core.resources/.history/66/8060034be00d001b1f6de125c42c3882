@@ -1,0 +1,76 @@
+package com.supplyco.jsonqr.dao_impl;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+
+
+import com.supplyco.jsonqr.dao.MasterDAO;
+import com.supplyco.jsonqr.model.Dippo;
+import com.supplyco.jsonqr.model.Southead;
+
+public class MasterDAO_impl implements MasterDAO {
+	
+	private JdbcTemplate jdbcTemplate;
+	
+	public MasterDAO_impl(DataSource dataSource) {
+		jdbcTemplate = new JdbcTemplate(dataSource);
+		
+	}
+	
+
+	@Override
+	public List<Dippo> dippolist() {
+
+		String sql = "SELECT x.* FROM hodms.dippo x\r\n" + 
+				"WHERE D_TYPE ='d'";
+
+		List<Dippo> li = jdbcTemplate.query(sql, new RowMapper<Dippo>() {
+			public Dippo mapRow(ResultSet rs, int row) throws SQLException {
+
+				Dippo dippo = new Dippo();
+				dippo.setDipponame(rs.getString("Dipponame"));
+				dippo.setDippocode(rs.getString("Dippocode"));
+				return dippo;
+			}
+		});
+
+		return li;
+	}
+
+
+	@Override
+	public List<Southead> isulist(String dippocode) {
+		
+		String sql = "select a.IsuNo ,max(a.TrDate) from southead a join sindetailgst b on a.IsuNo = b.isuno and a.ThisOLCode ='"+dippocode+"' and a.IsuDate >= '2020-03-01' and a.IsuMode ='2' and b.BStatus ='1' \r\n" + 
+				     "GROUP by a.IsuNo ORDER BY a.IsuNo ASC";
+		
+		System.out.println("issue list->"+sql);
+		
+		List<Southead> li =jdbcTemplate.query(sql, new RowMapper<Southead>() {
+
+			@Override
+			public Southead mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Southead sout = new Southead();
+				sout.setIsuno(rs.getString("isuno"));
+				sout.setIsudate(rs.getString("isudate"));
+				sout.setIsumode(rs.getString("isumode"));
+				sout.setSaleMode(rs.getString("salemode"));
+				sout.setTrnsCode(rs.getString("Transcode"));
+				sout.setNetAmt(rs.getString("Netamt"));
+				
+				return sout;
+			}
+			});
+		
+		
+		
+		return li;
+	}
+
+}

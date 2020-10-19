@@ -1,0 +1,28 @@
+package com.supplyco.jsonqr.dao_impl;
+
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import com.supplyco.jsonqr.dao.MasterDAO;
+import com.supplyco.jsonqr.model.Dippo;
+
+public class MasterDAO_impl implements MasterDAO {
+	
+	private JdbcTemplate jdbctemplate;
+	
+	public MasterDAO_impl(DataSource dataSource) {
+		jdbctemplate = new JdbcTemplate(dataSource);
+		
+	}
+	
+
+	@Override
+	public List<Dippo> dippolist() {
+		
+		return null;
+	}
+
+}

@@ -1,0 +1,5 @@
+package com.supplyco.jsonqr.controller;
+
+public class MasterController {
+
+}

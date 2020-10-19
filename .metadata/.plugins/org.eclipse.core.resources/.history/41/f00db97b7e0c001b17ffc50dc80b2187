@@ -1,0 +1,12 @@
+package com.supplyco.jsonqr.dao;
+
+import java.util.List;
+
+import com.supplyco.jsonqr.model.Login;
+
+
+public interface AdminDao {
+	
+	public Login list_menus(Login login);
+
+}
